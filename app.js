@@ -3,12 +3,15 @@ const IMGPATH = "https://image.tmdb.org/t/p/w1280";
 const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
 
 const movieContainer = document.querySelector('.movie-container');
+const pagination = document.querySelector('.pagination')
 const search = document.querySelector('.search-bar')
 
 const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
 
 let page = 1;
+
+pagination.style.display = 'none';
 // console.log(search);
 
 // console.log(movieContainer);
@@ -21,6 +24,7 @@ const getMovies = async function(url){
     console.log(data);
 
     showMovies(data);
+    pagination.style.display = 'flex';
 }
 
 
@@ -75,11 +79,11 @@ search.addEventListener(
         if(e.target.value !== ""){
             // console.log(e.target.value);
             getMovies(SEARCHAPI + e.target.value)
-            document.querySelector('.pagination').style.display = 'none';
+            pagination.style.display = 'none';
         }
         else{
             getMovies(POPULARAPIURL);
-            document.querySelector('.pagination').style.display = 'flex';
+            pagination.style.display = 'flex';
         }
     }
 )
